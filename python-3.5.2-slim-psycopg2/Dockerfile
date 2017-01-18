@@ -6,5 +6,5 @@ RUN set -x \
     && apt-get update -qq \
     && apt-get install -y build-essential libpq-dev \
     && pip install 'psycopg2==2.6.2' \
-    && apt-get autoremove -y build-essential libpq-dev \
+    && apt-get autoremove -y build-essential \
     && apt-get clean
