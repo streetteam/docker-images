@@ -6,17 +6,17 @@ RUN apt-get update
 RUN apt-get install -y software-properties-common && add-apt-repository --update ppa:jonathonf/python-3.6
 
 # Add all our standard system dependencies
-RUN apt-get install -y python3.6 python3.6-venv python3.6-pip \
-                       python3.6-dev libpython3.6-dev python2.7 libxml2-dev \
-		       libxslt1-dev gettext libpng16-16 postgresql-client \
-		       git openssh-client make gcc
+RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
+                       libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
+		       libpng16-16 postgresql-client git openssh-client \
+		       make gcc
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python2 python3 /usr/bin/python3.6 10
-RUN ln -sf /usr/bin/python2.6 /usr/local/bin/python3.6
 
-# Newer pip, please
-RUN pip3 install --upgrade pip
+# Install latest pip
+RUN curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+RUN python3 /tmp/get-pip.py
 
 # Install latest stable Google Chrome browser
 RUN curl -o /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
