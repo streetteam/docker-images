@@ -20,7 +20,8 @@ ENV LANG=en_GB.utf8
 ENV LANGUAGE=en_GB.utf8
 
 # Make Python 3.6.x the default python3
-RUN update-alternatives --install /usr/bin/python2 python3 /usr/bin/python3.6 10
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
 
 # Install latest stable Google Chrome browser
 RUN curl -o /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
