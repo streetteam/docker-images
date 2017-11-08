@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 
 RUN apt-get update
+RUN apt-get upgrade -y
 
 # Trusted PPA for Python 3.6.x releases on xenial
 RUN apt-get install -y software-properties-common && add-apt-repository --update ppa:jonathonf/python-3.6
@@ -9,14 +10,17 @@ RUN apt-get install -y software-properties-common && add-apt-repository --update
 RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                        libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
 		       libpng16-16 postgresql-client git openssh-client \
-		       make gcc
+		       make gcc locales
+
+# Set correct locale
+RUN locale-gen en_GB.utf8
+RUN update-locale LC_ALL=en_GB.utf8 LANG=en_GB.utf8 LANGUAGE=en_GB.utf8
+ENV LC_ALL=en_GB.utf8
+ENV LANG=en_GB.utf8
+ENV LANGUAGE=en_GB.utf8
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python2 python3 /usr/bin/python3.6 10
-
-# Install latest pip
-RUN curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
-RUN python3 /tmp/get-pip.py
 
 # Install latest stable Google Chrome browser
 RUN curl -o /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -34,3 +38,6 @@ WORKDIR /home/ciuser
 
 # Preload NodeJS 8.5.0
 RUN nave use 8.5.0 node --version
+
+# Ensure locale is available in any interactive/non-interactive shell
+RUN cat /etc/default/locale >> /home/ciuser/.bashrc
