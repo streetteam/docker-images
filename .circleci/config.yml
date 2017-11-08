@@ -10,3 +10,19 @@ jobs:
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker build -t $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH circleci-base/
       - run: docker push $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
