@@ -24,9 +24,10 @@ RUN curl -o /tmp/nave.sh https://raw.githubusercontent.com/isaacs/nave/master/na
 RUN cp /tmp/nave.sh /usr/bin/nave
 RUN chmod +x /usr/bin/nave
 
-# Restrict further actions to the non-root 'ubuntu' user
-USER ubuntu
-WORKDIR /home/ubuntu
+# Restrict further actions to the non-root 'ciuser' user
+RUN useradd -ms /bin/bash ciuser
+USER ciuser
+WORKDIR /home/ciuser
 
 # Preload NodeJS 8.5.0
 RUN nave use 8.5.0 node --version
