@@ -7,7 +7,9 @@ RUN apt install -y software-properties-common
 RUN add-apt-repository --update ppa:jonathonf/python-3.6
 
 # Add all our standard system dependencies
-RUN apt install -y python3.6 libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext libpng16-16
+RUN apt install -y python3.6 python3.6-venv python3.6-dev \
+                   libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
+		   libpng16-16 postgresql-client git openssh-client
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python2 python3 /usr/bin/python3.6 10
