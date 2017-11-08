@@ -9,7 +9,7 @@ RUN apt-get install -y software-properties-common && add-apt-repository --update
 RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                    libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
 		   libpng16-16 postgresql-client git openssh-client \
-		   make
+		   make gcc
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python2 python3 /usr/bin/python3.6 10
