@@ -1,15 +1,15 @@
 FROM ubuntu:xenial
 
-RUN apt update
-RUN apt install -y software-properties-common
+RUN apt-get update
 
 # Trusted PPA for Python 3.6.x releases on xenial
-RUN add-apt-repository --update ppa:jonathonf/python-3.6
+RUN apt-get install -y software-properties-common && add-apt-repository --update ppa:jonathonf/python-3.6
 
 # Add all our standard system dependencies
-RUN apt install -y python3.6 python3.6-venv python3.6-dev \
+RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                    libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
-		   libpng16-16 postgresql-client git openssh-client
+		   libpng16-16 postgresql-client git openssh-client \
+		   make
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python2 python3 /usr/bin/python3.6 10
