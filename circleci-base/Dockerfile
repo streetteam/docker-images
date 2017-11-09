@@ -32,6 +32,11 @@ RUN curl -o /tmp/nave.sh https://raw.githubusercontent.com/isaacs/nave/master/na
 RUN cp /tmp/nave.sh /usr/bin/nave
 RUN chmod +x /usr/bin/nave
 
+# Install yarn installer, so we have it available
+RUN curl -o /tmp/install-yarn.sh https://yarnpkg.com/install.sh
+RUN cp /tmp/install-yarn.sh /usr/bin/install-yarn
+RUN chmod +x /usr/bin/install-yarn
+
 # Restrict further actions to the non-root 'ciuser' user
 RUN useradd -ms /bin/bash ciuser
 USER ciuser
