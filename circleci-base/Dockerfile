@@ -10,8 +10,15 @@ RUN apt-get install -y software-properties-common && add-apt-repository --update
 RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                        libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
 		       libpng16-16 postgresql-client git openssh-client \
-		       make gcc language-pack-en xvfb \
-		       sudo
+		       make gcc xvfb sudo \
+		       locales
+
+# Set correct locale
+RUN locale-gen en_GB.utf8
+RUN update-locale LC_ALL=en_GB.utf8 LANG=en_GB.utf8 LANGUAGE=en_GB.utf8
+ENV LC_ALL=en_GB.utf8
+ENV LANG=en_GB.utf8
+ENV LANGUAGE=en_GB.utf8
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10
@@ -33,10 +40,9 @@ RUN chmod +x /usr/bin/install-yarn
 
 # Setup Xvfb
 ENV DISPLAY :99
-RUN mkdir /opt/xvfb
-COPY entrypoint.sh /opt/xvfb/entrypoint.sh
-RUN chmod +x /opt/xvfb/entrypoint.sh
-CMD ["/opt/xvfb/entry_point.sh"]
+RUN echo DISPLAY=":99" >> /etc/environment
+COPY xvfb.init /etc/init.d/xvfb
+RUN chmod +x /etc/init.d/xvfb
 
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser
