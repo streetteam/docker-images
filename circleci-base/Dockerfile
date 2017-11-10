@@ -10,14 +10,8 @@ RUN apt-get install -y software-properties-common && add-apt-repository --update
 RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                        libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
 		       libpng16-16 postgresql-client git openssh-client \
-		       make gcc locales
-
-# Set correct locale
-RUN locale-gen en_GB.utf8
-RUN update-locale LC_ALL=en_GB.utf8 LANG=en_GB.utf8 LANGUAGE=en_GB.utf8
-ENV LC_ALL=en_GB.utf8
-ENV LANG=en_GB.utf8
-ENV LANGUAGE=en_GB.utf8
+		       make gcc language-pack-en xvfb \
+		       sudo
 
 # Make Python 3.6.x the default python3
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10
@@ -37,8 +31,17 @@ RUN curl -o /tmp/install-yarn.sh https://yarnpkg.com/install.sh
 RUN cp /tmp/install-yarn.sh /usr/bin/install-yarn
 RUN chmod +x /usr/bin/install-yarn
 
-# Restrict further actions to the non-root 'ciuser' user
+# Setup Xvfb
+ENV DISPLAY :99
+RUN mkdir /opt/xvfb
+COPY entrypoint.sh /opt/xvfb/entrypoint.sh
+RUN chmod +x /opt/xvfb/entrypoint.sh
+CMD ["/opt/xvfb/entry_point.sh"]
+
+# Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser
+RUN echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 USER ciuser
 WORKDIR /home/ciuser
 
