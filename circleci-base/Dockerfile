@@ -3,13 +3,21 @@ FROM ubuntu:xenial
 RUN apt-get update
 RUN apt-get upgrade -y
 
+RUN apt-get install -y software-properties-common curl
+
 # Trusted PPA for Python 3.6.x releases on xenial
-RUN apt-get install -y software-properties-common && add-apt-repository --update ppa:jonathonf/python-3.6
+RUN add-apt-repository ppa:jonathonf/python-3.6
+
+# Official PostgreSQL repo
+RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
+RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
+RUN apt-get update
 
 # Add all our standard system dependencies
 RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                        libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
-		       libpng16-16 postgresql-client git openssh-client \
+		       libpng16-16 postgresql-client-9.6 git openssh-client \
 		       make gcc xvfb sudo \
 		       locales
 
