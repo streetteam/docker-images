@@ -19,7 +19,7 @@ RUN apt-get install -y python3.6 python3.6-venv python3.6-dev \
                        libpython3.6-dev python2.7 libxml2-dev libxslt1-dev gettext \
 		       libpng16-16 postgresql-client-9.6 git openssh-client \
 		       make gcc xvfb sudo \
-		       locales
+		       locales build-essential libsqlite3-dev ruby-dev
 
 # Set correct locale
 RUN locale-gen en_GB.utf8
@@ -51,6 +51,9 @@ ENV DISPLAY :99
 RUN echo DISPLAY=":99" >> /etc/environment
 COPY xvfb.init /etc/init.d/xvfb
 RUN chmod +x /etc/init.d/xvfb
+
+# Install mailcatcher
+RUN gem install mailcatcher --no-ri --no-rdoc
 
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser
