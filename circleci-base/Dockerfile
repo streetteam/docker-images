@@ -10,25 +10,15 @@ RUN apt-get update &&  \
     apt-get update && apt-get install -y --no-install-recommends \
     libpython3.6-dev python2.7-minimal libxml2-dev libxslt1-dev gettext \
     libpng16-16 postgresql-client-9.6 git openssh-client \
-    locales build-essential libsqlite3-dev ruby-dev \
-    python3.6 python3.6-venv python3.6-dev \
-    redis-server rabbitmq-server make gcc \
-    xvfb sudo && \
-    curl -o /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt install -y --no-install-recommends /tmp/google-chrome-stable_current_amd64.deb && \
-    rm /tmp/google-chrome-stable_current_amd64.deb && \
+    python3.6 python3.6-venv python3.6-dev make \
+    gcc sudo && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10 && \
+    apt-get remove -y --purge software-properties-common python3.5 && \
+    apt-get clean -y && \
     apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/lists/*
-
-# Make Python 3.6.x the default python3
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
-
-# Setup Xvfb
-ENV DISPLAY :99
-COPY xvfb.init /etc/init.d/xvfb
-RUN echo DISPLAY=":99" >> /etc/environment && chmod +x /etc/init.d/xvfb
-    
+    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+ 
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
     chmod +x /usr/bin/nave
@@ -37,18 +27,15 @@ RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/n
 RUN curl -o /usr/bin/install-yarn https://yarnpkg.com/install.sh && \
     chmod +x /usr/bin/install-yarn
 
-# Install mailcatcher
-RUN gem install mailcatcher --no-ri --no-rdoc
-
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Set correct locale and ensure locale is available in any interactive/non-interactive shell
-RUN locale-gen en_GB.utf8 && update-locale LC_ALL=en_GB.utf8 LANG=en_GB.utf8 LANGUAGE=en_GB.utf8 && \
-    cat /etc/default/locale >> /home/ciuser/.bashrc
-ENV LC_ALL=en_GB.utf8
-ENV LANG=en_GB.utf8
-ENV LANGUAGE=en_GB.utf8
+COPY locale /etc/default/locale
+RUN cat /etc/default/locale >> /home/ciuser/.bashrc
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV LANGUAGE C.UTF-8
 
 USER ciuser
 WORKDIR /home/ciuser

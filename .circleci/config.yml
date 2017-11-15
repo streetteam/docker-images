@@ -8,8 +8,14 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build -t $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH circleci-base/
-      - run: docker push $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH
+      - run: |
+          docker build -t $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH circleci-base/
+          docker build -t $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH circleci-fullstack/
+          docker build -t $DOCKER_ORG/circleci-fullstack-chrome:$CIRCLE_BRANCH circleci-fullstack-chrome/
+      - run: |
+          docker push $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH
+          docker push $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH
+          docker push $DOCKER_ORG/circleci-fullstack-chrome:$CIRCLE_BRANCH
 
 workflows:
   version: 2
