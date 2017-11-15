@@ -9,9 +9,9 @@ jobs:
           docker_layer_caching: true
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: |
-          docker build -t $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH circleci-base/
-          docker build -t $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH circleci-fullstack/
-          docker build -t $DOCKER_ORG/circleci-fullstack-chrome:$CIRCLE_BRANCH circleci-fullstack-chrome/
+          docker build -t $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH -t circleci-base circleci-base/
+          docker build -t $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH -t circleci-fullstack circleci-fullstack/
+          docker build -t $DOCKER_ORG/circleci-fullstack-chrome:$CIRCLE_BRANCH -t circleci-fullstack-chrome circleci-fullstack-chrome/
       - run: |
           docker push $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH
           docker push $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH
