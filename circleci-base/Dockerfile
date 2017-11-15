@@ -9,15 +9,18 @@ RUN apt-get update &&  \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
     libpython3.6-dev python2.7-minimal libxml2-dev libxslt1-dev gettext \
-    libpng16-16 postgresql-client-9.6 git openssh-client \
+    libpng12-0 postgresql-client-9.6 git openssh-client \
     python3.6 python3.6-venv python3.6-dev make \
     gcc sudo && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10 && \
     apt-get remove -y --purge software-properties-common python3.5 && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+
+
+# Ensure python3.6 is default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
  
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
