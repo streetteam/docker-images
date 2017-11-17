@@ -12,10 +12,12 @@ jobs:
           docker build -t $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH -t circleci-base circleci-base/
           docker build -t $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH -t circleci-fullstack circleci-fullstack/
           docker build -t $DOCKER_ORG/circleci-fullstack-chrome:$CIRCLE_BRANCH -t circleci-fullstack-chrome circleci-fullstack-chrome/
+          docker build -t $DOCKER_ORG/circleci-deploy:$CIRCLE_BRANCH -t circleci-deploy circleci-deploy/
       - run: |
           docker push $DOCKER_ORG/circleci-base:$CIRCLE_BRANCH
           docker push $DOCKER_ORG/circleci-fullstack:$CIRCLE_BRANCH
           docker push $DOCKER_ORG/circleci-fullstack-chrome:$CIRCLE_BRANCH
+          docker push $DOCKER_ORG/circleci-deploy:$CIRCLE_BRANCH
 
 workflows:
   version: 2
