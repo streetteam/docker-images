@@ -15,10 +15,12 @@ RUN useradd -ms /bin/bash ciuser
 
 # Set correct locale and ensure locale is available in any interactive/non-interactive shell
 COPY locale /etc/default/locale
-RUN cat /etc/default/locale >> /home/ciuser/.bashrc
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV LANGUAGE C.UTF-8
 
 USER ciuser
 WORKDIR /home/ciuser
+
+COPY bashrc .docker.bashrc
+RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc
