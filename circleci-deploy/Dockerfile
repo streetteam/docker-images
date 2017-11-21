@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
+# Ensure python3.6 is default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
+
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
