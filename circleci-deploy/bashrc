@@ -1,0 +1,8 @@
+source /etc/default/locale
+
+
+# If we're in a circleci env and BASH_ENV is set, source it
+if [ ! -z "${BASH_ENV}" ] && [ -f "${BASH_ENV}" ]
+then
+    source "${BASH_ENV}"
+fi
