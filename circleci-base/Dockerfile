@@ -8,7 +8,7 @@ RUN apt-get update &&  \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
-    libpython3.6-dev python2.7-minimal libxml2-dev libxslt1-dev gettext zlib1g-dev \
+    libpython3.6-dev python2.7-minimal libxml2-dev libxslt1-dev gettext zlib1g-dev libjpeg-dev \
     libpng12-0 postgresql-client-9.6 git openssh-client \
     python3.6 python3.6-venv python3.6-dev make \
     gcc sudo && \
