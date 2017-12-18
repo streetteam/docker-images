@@ -16,7 +16,12 @@ RUN apt-get update &&  \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
 
+# Setup Xvfb
+RUN echo DISPLAY=":99" >> /etc/environment
 COPY xvfb.init /etc/init.d/xvfb
 RUN chmod +x /etc/init.d/xvfb
+
+# Following line fixes https://github.com/SeleniumHQ/docker-selenium/issues/87
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 USER ciuser
