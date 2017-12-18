@@ -1,5 +1,5 @@
 XVFB=/usr/bin/Xvfb
-XVFBARGS=":1 -screen 0 1024x768x24
+XVFBARGS=":1 -screen 0 1024x768x24"
 PIDFILE=/var/run/xvfb.pid
 case "$1" in
   start)
