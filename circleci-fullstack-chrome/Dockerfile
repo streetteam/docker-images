@@ -16,7 +16,7 @@ RUN apt-get update &&  \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
 
-COPY xfvb.init /etc/init.d/xfvb
-RUN chmod +x /etc/init.d/xfvb
+COPY xvfb.init /etc/init.d/xvfb
+RUN chmod +x /etc/init.d/xvfb
 
 USER ciuser
