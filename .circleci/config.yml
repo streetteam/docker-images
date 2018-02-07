@@ -2,12 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:18.01.0-ce-git
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: |
+          apk add --no-cache py-pip
+          pip install awscli
+          eval $(aws ecr get-login --region us-east-1 --no-include-email)
       - run: |
           DOCKER_ARGS="--compress"
           if [ ! -z "${DOCKER_SQUASH}" ] && [[ "$(echo ${DOCKER_SQUASH} | tr '[A-Z]' '[a-z]')" == "true" ]]
@@ -18,11 +22,13 @@ jobs:
           docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-fullstack:${CIRCLE_BRANCH}" -t circleci-fullstack circleci-fullstack/
           docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-fullstack-chrome:${CIRCLE_BRANCH}" -t circleci-fullstack-chrome circleci-fullstack-chrome/
           docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-deploy:${CIRCLE_BRANCH}" -t circleci-deploy circleci-deploy/
+          docker build "${DOCKER_ARGS}" -t "${APEX_ROUTER_ECR_REPO}/nginx-apex-lb:${CIRCLE_BRANCH}" -t nginx-apex-lb nginx-apex-lb/
       - run: |
           docker push "${DOCKER_ORG}/circleci-base:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-fullstack:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-fullstack-chrome:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-deploy:${CIRCLE_BRANCH}"
+          docker push "${APEX_ROUTER_ECR_REPO}/nginx-apex-lb:${CIRCLE_BRANCH}"
 
 workflows:
   version: 2
