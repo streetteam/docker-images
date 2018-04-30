@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 # Trusted PPA for Python 3.6.x releases on xenial and official PostgreSQL repo,
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
-    apt-get install -y --no-install-recommends software-properties-common curl && \
+    apt-get install -y --no-install-recommends software-properties-common curl apt-transport-https && \
     add-apt-repository ppa:jonathonf/python-3.6 && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
