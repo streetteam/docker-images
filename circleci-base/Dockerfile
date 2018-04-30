@@ -5,6 +5,7 @@ FROM ubuntu:xenial
 RUN apt-get update &&  \
     apt-get install -y --no-install-recommends software-properties-common curl apt-transport-https && \
     add-apt-repository ppa:jonathonf/python-3.6 && \
+    curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
