@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common curl gnupg2 apt-transport-https && \
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
-    apt-get update && apt-get install -y --no-install-recommends git openssh-client heroku python3.6-minimal python3.6-venv python-requests sudo make && \
+    apt-get update && apt-get install -y --no-install-recommends git openssh-client heroku python3.6-minimal python3.6-venv python3-pip python3-setuptools python3-wheel sudo make && \
     apt-get install -y python3.6-distutils && \
     apt-get remove -y --purge software-properties-common curl gnupg2 apt-transport-https && \
     apt-get clean -y && \
@@ -13,7 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Ensure python3.6 is default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10 && \
+    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10
+    
+RUN pip3 install --upgrade pip requests setuptools
 
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
