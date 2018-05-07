@@ -14,7 +14,7 @@ RUN apt-get update &&  \
     libpng12-0 postgresql-client-9.6 git openssh-client heroku \
     python3.6 python3.6-venv python3-distutils python3.6-dev make \
     gcc sudo && \
-    apt-get remove -y --purge software-properties-common python3.5 && \
+    apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
