@@ -1,5 +1,7 @@
 FROM circleci-fullstack
 
+USER root
+
  # from https://github.com/cypress-io/cypress-docker-images/blob/master/base/8/Dockerfile
 RUN apt-get update && \
   apt-get install -y \
@@ -10,3 +12,5 @@ RUN apt-get update && \
     libxss1 \
     libasound2 \
     xvfb
+
+USER ciuser
