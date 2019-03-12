@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     apt-get update && apt-get install -y --no-install-recommends git openssh-client heroku python3.6-minimal python3.6-venv python3-pip python3-setuptools python3-wheel sudo make && \
-    apt-get install -y python3.6-distutils && \
+    apt-get install -y libpython3.6 libpython3.6-stdlib && \
     apt-get remove -y --purge software-properties-common curl gnupg2 apt-transport-https && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
