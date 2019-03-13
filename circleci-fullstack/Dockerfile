@@ -6,7 +6,7 @@ USER root
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential libsqlite3-dev ruby ruby-dev \
     redis-server rabbitmq-server ca-certificates && \
-    gem install mailcatcher --no-ri --no-rdoc &&  \
+    gem install mailcatcher -v 0.6.5 --no-ri --no-rdoc &&  \
     apt-get remove -y --purge build-essential ruby-dev libsqlite3-dev && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
