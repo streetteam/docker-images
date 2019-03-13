@@ -9,7 +9,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get remove -y --purge software-properties-common curl gnupg2 apt-transport-https && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=918881
+# debian unstable only ships distutils with python3.7
+# this is an ugly hack to get it working for 3.6
+    cp -arv /usr/lib/python3.7/distutils /usr/lib/python3.6
 
 # Ensure python3.6 is default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
