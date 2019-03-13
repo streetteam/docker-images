@@ -12,7 +12,7 @@ RUN apt-get update &&  \
     apt-get update && apt-get install -y --no-install-recommends \
     libpython3.6-dev python2.7-minimal libxml2-dev libxslt1-dev gettext zlib1g-dev libjpeg-dev \
     libpng12-0 postgresql-client-9.6 git openssh-client heroku \
-    python3.6 python3.6-venv python3-distutils python3.6-dev make \
+    python3.6 python3.6-venv libpython3.6 libpython3.6-stdlib python3.6-dev make \
     gcc sudo && \
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
