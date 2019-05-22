@@ -1,26 +1,34 @@
 FROM bitnami/minideb:unstable
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        software-properties-common curl gnupg2 apt-transport-https && \
+        apt-utils software-properties-common curl gnupg2 apt-transport-https && \
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
-    apt-get update && apt-get install -y --no-install-recommends git openssh-client heroku python3.6-minimal python3.6-venv python3-pip python3-setuptools python3-wheel sudo make && \
-    apt-get install -y libpython3.6 libpython3.6-stdlib && \
+    apt-get update && apt-get install -y --no-install-recommends git openssh-client build-essential checkinstall \
+    heroku make gcc sudo && \
+    # python3.7 related dependencies
+    apt-get install -y --no-install-recommends libreadline-gplv2-dev libncursesw5-dev libssl-dev \
+    sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev wget && \
+    # download python3.7 and install
+    wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
+    tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
+    /usr/src/Python-3.7.3/configure --enable-optimizations && \
+    make altinstall && \
+    # install pip
+    # Removing lsb_release as it causes problem when installing pip
+    # see: https://github.com/pypa/pip/issues/4924
+    if [ -d /usr/bin/lsb_release ]; then rm /usr/bin/lsb_release; fi && \
+    python3.7 -m pip install --upgrade pip && \
     apt-get remove -y --purge software-properties-common curl gnupg2 apt-transport-https && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=918881
-# debian unstable only ships distutils with python3.7
-# this is an ugly hack to get it working for 3.6
-    cp -arv /usr/lib/python3.7/distutils /usr/lib/python3.6
+    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-# Ensure python3.6 is default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10
+# Ensure python3.7 is default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
+    update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
     
-RUN pip3 install --upgrade pip requests setuptools
+RUN pip install --upgrade pip requests setuptools
 
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
