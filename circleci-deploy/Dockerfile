@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # install pip
     # Removing lsb_release as it causes problem when installing pip
     # see: https://github.com/pypa/pip/issues/4924
-    if [ -d /usr/bin/lsb_release ]; then rm /usr/bin/lsb_release; fi && \
+    rm -rf /usr/bin/lsb_release 2>dev/null && \
     python3.7 -m pip install --upgrade pip && \
     apt-get remove -y --purge software-properties-common curl gnupg2 apt-transport-https && \
     apt-get clean -y && \

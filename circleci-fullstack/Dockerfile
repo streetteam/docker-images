@@ -16,6 +16,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
     update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
 
-RUN pip install --upgrade pip requests setuptools
-
 USER ciuser
