@@ -4,10 +4,11 @@ FROM ubuntu:xenial
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
     apt-get install -y --no-install-recommends apt-utils software-properties-common curl apt-transport-https \
-    build-essential checkinstall make gcc sudo  && \
+    build-essential checkinstall make gcc sudo && \
     # python3.7 related dependencies
-    apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev libncursesw5-dev libssl-dev \
-    sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev wget && \
+    apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
+    libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
+    libbz2-dev libffi-dev zlib1g-dev wget gettext libgettextpo-dev && \
     # download python3.7 and install
     wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
     tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
@@ -24,7 +25,7 @@ RUN apt-get update &&  \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client-9.6 git openssh-client && \
+    postgresql-client-9.6 git openssh-client heroku && \
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
