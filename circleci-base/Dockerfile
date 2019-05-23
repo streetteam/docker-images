@@ -1,29 +1,42 @@
 FROM ubuntu:xenial
 
-# Trusted PPA for Python 3.6.x releases on xenial and official PostgreSQL repo,
+# Install python3.7 and official PostgreSQL repo,
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
-    apt-get install -y --no-install-recommends software-properties-common curl apt-transport-https && \
-    add-apt-repository ppa:jonathonf/python-3.6 && \
+    apt-get install -y --no-install-recommends apt-utils software-properties-common curl apt-transport-https \
+    build-essential checkinstall make gcc sudo && \
+    # python3.7 related dependencies
+    apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
+    libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
+    libbz2-dev libffi-dev zlib1g-dev wget gettext libgettextpo-dev && \
+    # download python3.7 and install
+    wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
+    tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
+    /usr/src/Python-3.7.3/configure --enable-optimizations && \
+    make altinstall && \
+    # install pip
+    # Removing lsb_release as it causes problem when installing pip
+    # see: https://github.com/pypa/pip/issues/4924
+    rm -rf /usr/bin/lsb_release 2>dev/null && \
+    python3.7 -m pip install --upgrade pip && \
+    # Heroku deps
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
-    libpython3.6-dev python2.7-minimal libxml2-dev libxslt1-dev gettext zlib1g-dev libjpeg-dev \
-    libpng12-0 postgresql-client-9.6 git openssh-client heroku \
-    python3.6 python3.6-venv libpython3.6 libpython3.6-stdlib python3.6-dev make \
-    gcc sudo && \
+    postgresql-client-9.6 git openssh-client heroku && \
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 
-# Ensure python3.6 is default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
- 
+# Ensure python3.7 is default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
+    update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
+
+
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
     chmod +x /usr/bin/nave

@@ -1,0 +1,7 @@
+# PyCharm / IntelliJ
+.idea/
+*.iml
+graphql.config.json
+.graphqlconfig
+
+.DS_Store

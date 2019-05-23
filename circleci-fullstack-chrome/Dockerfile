@@ -13,8 +13,8 @@ RUN apt-get update &&  \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # Ensure python3.6 is default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.6 10
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
+    update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
 
 # Setup Xvfb
 RUN echo DISPLAY=":99" >> /etc/environment
