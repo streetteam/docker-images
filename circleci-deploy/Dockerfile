@@ -1,7 +1,7 @@
 FROM bitnami/minideb:unstable
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        apt-utils software-properties-common curl gnupg2 apt-transport-https && \
+        apt-utils software-properties-common curl gnupg2 apt-transport-https unzip && \
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     apt-get update && apt-get install -y --no-install-recommends git openssh-client build-essential checkinstall \
@@ -15,6 +15,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
     /usr/src/Python-3.7.3/configure --enable-optimizations && \
     make altinstall && \
+
+    # Install terraform
+    wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip -P /usr/src && \
+    unzip /usr/src/terraform_0.12.3_linux_amd64.zip -d /usr/src && \
+    mv /usr/src/terraform /usr/local/bin && \
+
     # install pip
     # Removing lsb_release as it causes problem when installing pip
     # see: https://github.com/pypa/pip/issues/4924
