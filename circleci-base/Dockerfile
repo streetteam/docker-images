@@ -57,8 +57,8 @@ ENV LANGUAGE C.UTF-8
 USER ciuser
 WORKDIR /home/ciuser
 
-# Preload NodeJS 8.5.0
-RUN nave use 8.5.0 node --version
+# Preload NodeJS 12.6.0
+RUN nave use 12.6.0 node --version
 
 COPY bashrc .docker.bashrc
 RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc
