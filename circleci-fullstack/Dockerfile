@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
     # Install terraform
-    wget https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip -P /usr/src && \
-    unzip /usr/src/terraform_0.12.3_linux_amd64.zip -d /usr/src && \
+    wget https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip -P /usr/src && \
+    unzip /usr/src/terraform_0.12.5_linux_amd64.zip -d /usr/src && \
     mv /usr/src/terraform /usr/local/bin
 
 # Ensure python3.6 is default
