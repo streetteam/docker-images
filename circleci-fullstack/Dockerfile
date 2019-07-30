@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # Install terraform
     git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
     mkdir -p ~/.local/bin && \
-    source ~/.profile && \
+    . ~/.profile && \
     ln -s ~/.tfenv/bin/* ~/.local/bin && \
     tfenv install 0.12.5
 
