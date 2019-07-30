@@ -17,10 +17,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     make altinstall && \
 
     # Install terraform
-    git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
-    mkdir -p ~/.local/bin && \
-    . ~/.profile && \
-    ln -s ~/.tfenv/bin/* ~/.local/bin && \
+    git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
+    ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
     tfenv install 0.12.5 && \
 
     # install pip
@@ -50,6 +48,3 @@ ENV LANGUAGE C.UTF-8
 
 USER ciuser
 WORKDIR /home/ciuser
-
-COPY bashrc .docker.bashrc
-RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc

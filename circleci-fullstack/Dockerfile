@@ -12,10 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
     # Install terraform
-    git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
-    mkdir -p ~/.local/bin && \
-    . ~/.profile && \
-    ln -s ~/.tfenv/bin/* ~/.local/bin && \
+    git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
+    ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
     tfenv install 0.12.5
 
 # Ensure python3.6 is default
