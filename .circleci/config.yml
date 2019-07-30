@@ -29,9 +29,6 @@ jobs:
           docker push "${DOCKER_ORG}/circleci-fullstack-chrome:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-fullstack-cypress:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-deploy:${CIRCLE_BRANCH}"
-          docker push "${APEX_ROUTER_ECR_REPO}:${CIRCLE_BRANCH}"
-          aws ecs update-service --region us-east-1 --cluster verve-apex-lb --service verve-apex-lb --force-new-deployment
-
 workflows:
   version: 2
   commit:

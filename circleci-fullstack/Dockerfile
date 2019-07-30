@@ -12,9 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
     # Install terraform
-    wget https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip -P /usr/src && \
-    unzip /usr/src/terraform_0.12.5_linux_amd64.zip -d /usr/src && \
-    mv /usr/src/terraform /usr/local/bin
+    git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
+    ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
+    tfenv install 0.12.5
 
 # Ensure python3.6 is default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \

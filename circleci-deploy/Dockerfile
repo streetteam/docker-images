@@ -17,9 +17,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     make altinstall && \
 
     # Install terraform
-    wget https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip -P /usr/src && \
-        unzip /usr/src/terraform_0.12.5_linux_amd64.zip -d /usr/src && \
-    mv /usr/src/terraform /usr/local/bin && \
+    git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
+    ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
+    tfenv install 0.12.5 && \
 
     # install pip
     # Removing lsb_release as it causes problem when installing pip
@@ -48,6 +48,3 @@ ENV LANGUAGE C.UTF-8
 
 USER ciuser
 WORKDIR /home/ciuser
-
-COPY bashrc .docker.bashrc
-RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc
