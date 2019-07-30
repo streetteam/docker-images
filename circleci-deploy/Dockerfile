@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     mkdir -p ~/.local/bin && \
     . ~/.profile && \
     ln -s ~/.tfenv/bin/* ~/.local/bin && \
-    tfenv install 0.12.5
+    tfenv install 0.12.5 && \
 
     # install pip
     # Removing lsb_release as it causes problem when installing pip

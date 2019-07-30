@@ -29,8 +29,6 @@ jobs:
           docker push "${DOCKER_ORG}/circleci-fullstack-chrome:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-fullstack-cypress:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-deploy:${CIRCLE_BRANCH}"
-          docker push "${APEX_ROUTER_ECR_REPO}:${CIRCLE_BRANCH}"
-
 workflows:
   version: 2
   commit:
