@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # see: https://github.com/pypa/pip/issues/4924
     rm -rf /usr/bin/lsb_release 2>dev/null && \
     python3.7 -m pip install --upgrade pip && \
-    apt-get remove -y --purge software-properties-common curl gnupg2 apt-transport-https && \
+    apt-get remove -y --purge software-properties-common gnupg2 apt-transport-https && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
