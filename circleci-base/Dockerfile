@@ -3,12 +3,20 @@ FROM ubuntu:xenial
 # Install python3.7 and official PostgreSQL repo,
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
-    apt-get install -y --no-install-recommends apt-utils software-properties-common curl apt-transport-https \
+    apt-get install -y --no-install-recommends apt-utils wget software-properties-common curl apt-transport-https \
     build-essential checkinstall make gcc sudo unzip && \
+    # install gdal
+    apt-get update && \
+    apt-get install -y binutils libproj-dev gdal-bin libgdal-dev && \
+
+    wget http://download.osgeo.org/gdal/2.4.2/gdal-2.4.2.tar.gz -P /usr/src && \
+    tar xzf /usr/src/gdal-2.4.2.tar.gz -C /usr/src/ && \
+    (cd /usr/src/gdal-2.4.2; ./configure --prefix=/usr/) && \
+    make install -C /usr/src/gdal-2.4.2 && \
     # python3.7 related dependencies
     apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
-    libbz2-dev libffi-dev zlib1g-dev wget gettext libgettextpo-dev && \
+    libbz2-dev libffi-dev zlib1g-dev gettext libgettextpo-dev && \
     # download python3.7 and install
     wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
     tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
