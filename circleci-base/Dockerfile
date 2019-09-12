@@ -6,6 +6,9 @@ RUN apt-get update &&  \
     apt-get install -y --no-install-recommends apt-utils wget software-properties-common curl apt-transport-https \
     build-essential checkinstall make gcc sudo unzip && \
     # install gdal
+    apt-get update && \
+    apt-get install -y binutils libproj-dev gdal-bin libgdal-dev && \
+
     wget http://download.osgeo.org/gdal/2.4.2/gdal-2.4.2.tar.gz -P /usr/src && \
     tar xzf /usr/src/gdal-2.4.2.tar.gz -C /usr/src/ && \
     (cd /usr/src/gdal-2.4.2; ./configure --prefix=/usr/) && \
