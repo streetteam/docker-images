@@ -6,13 +6,9 @@ RUN apt-get update &&  \
     apt-get install -y --no-install-recommends apt-utils wget software-properties-common curl apt-transport-https \
     build-essential checkinstall make gcc sudo unzip && \
     # install gdal
+    add-apt-repository ppa:ubuntugis/ppa && \
     apt-get update && \
-    apt-get install -y binutils libproj-dev gdal-bin libgdal-dev && \
-
-    wget http://download.osgeo.org/gdal/2.4.2/gdal-2.4.2.tar.gz -P /usr/src && \
-    tar xzf /usr/src/gdal-2.4.2.tar.gz -C /usr/src/ && \
-    (cd /usr/src/gdal-2.4.2; ./configure --prefix=/usr/) && \
-    make install -C /usr/src/gdal-2.4.2 && \
+    apt-get install -y gdal-bin libgdal-dev && \
     # python3.7 related dependencies
     apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
