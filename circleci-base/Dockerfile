@@ -57,6 +57,10 @@ ENV LANGUAGE C.UTF-8
 USER ciuser
 WORKDIR /home/ciuser
 
+# heroku plugins installation
+RUN heroku plugins:install heroku-repo && \
+    heroku plugins:install heroku-releases-retry
+
 # Preload NodeJS 12.6.0
 RUN nave use 12.6.0 node --version
 
