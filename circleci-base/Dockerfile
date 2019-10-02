@@ -13,6 +13,8 @@ RUN apt-get update &&  \
     apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
     libbz2-dev libffi-dev zlib1g-dev gettext libgettextpo-dev && \
+    # airflow related deps
+    apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake && \
     # download python3.7 and install
     wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
     tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
