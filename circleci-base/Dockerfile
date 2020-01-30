@@ -13,6 +13,13 @@ RUN apt-get update &&  \
     apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
     libbz2-dev libffi-dev zlib1g-dev gettext libgettextpo-dev libgnutls28-dev && \
+    # dependencies for using node-browser for ui-tests
+    apt-get install -yq --no-install-recommends \
+    libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
+    libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
+    libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 \
+    libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
+    libnss3 && \
     # airflow related deps
     apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake && \
     # download python3.7 and install
