@@ -39,6 +39,10 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python
     
 RUN pip install --upgrade pip requests setuptools
 
+# Install nave for NodeJS versions
+RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
+    chmod +x /usr/bin/nave
+    
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
