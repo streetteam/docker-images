@@ -31,7 +31,7 @@ RUN apt-get update &&  \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client-11 git openssh-client heroku && \
+    postgresql-client-11 git openssh-client heroku parallel && \
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
