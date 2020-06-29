@@ -42,6 +42,9 @@ RUN pip install --upgrade pip requests setuptools
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
     chmod +x /usr/bin/nave
+
+# Install Sentry-cli, for FE sourcemap upload
+RUN curl -sL https://sentry.io/get-cli/ | bash
     
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
