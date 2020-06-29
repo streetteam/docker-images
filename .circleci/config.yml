@@ -2,11 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:19.03.8
+      - image: docker:19.03.8-git
     steps:
       - checkout
-      - setup_remote_docker
-#          docker_layer_caching: true
+      - setup_remote_docker:
+          version: 19.03.8
+          docker_layer_caching: true
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: |
           apk add --no-cache py-pip
