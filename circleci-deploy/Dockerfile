@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     apt-get update && apt-get install -y --no-install-recommends git openssh-client build-essential checkinstall \
-    heroku make gcc sudo && \
+    heroku postgresql-client make gcc sudo && \
     # python3.7 related dependencies
     apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
