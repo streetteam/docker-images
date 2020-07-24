@@ -41,4 +41,8 @@ RUN curl --silent --show-error --location --fail --retry 3 \
   dpkg -i google-chrome-stable_current_amd64.deb && \
   rm -rf google-chrome-stable_current_amd64.deb
 
+# Ensure python3.7 is default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
+    update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
+
 USER ciuser
