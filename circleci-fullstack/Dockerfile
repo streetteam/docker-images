@@ -5,7 +5,7 @@ USER root
 # Install mailcatcher, redis and rabbit, then clean up after ourselves
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential ruby ruby-dev unzip \
-    redis-server rabbitmq-server ca-certificates && \
+    redis-server rabbitmq-server ca-certificates jq && \
     gem install mailcatcher -v 0.6.5 --no-ri --no-rdoc &&  \
     apt-get remove -y --purge ruby-dev && \
     apt-get clean -y && \
