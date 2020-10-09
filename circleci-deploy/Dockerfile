@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
     libbz2-dev libffi-dev zlib1g-dev wget gettext libgettextpo-dev libgnutls28-dev && \
     # download python3.7 and install
-    wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
-    tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
-    /usr/src/Python-3.7.3/configure --enable-optimizations && \
+    wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz -P /usr/src && \
+    tar xzf /usr/src/Python-3.7.9.tgz -C /usr/src/ && \
+    /usr/src/Python-3.7.9/configure --enable-optimizations && \
     make altinstall && \
 
     # Install terraform

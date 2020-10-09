@@ -16,9 +16,9 @@ RUN apt-get update &&  \
     # airflow related deps
     apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake && \
     # download python3.7 and install
-    wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -P /usr/src && \
-    tar xzf /usr/src/Python-3.7.3.tgz -C /usr/src/ && \
-    /usr/src/Python-3.7.3/configure --enable-optimizations && \
+    wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz -P /usr/src && \
+    tar xzf /usr/src/Python-3.7.9.tgz -C /usr/src/ && \
+    /usr/src/Python-3.7.9/configure --enable-optimizations && \
     make altinstall && \
     # install pip
     # Removing lsb_release as it causes problem when installing pip
