@@ -23,11 +23,14 @@ jobs:
           docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-fullstack:${CIRCLE_BRANCH}" -t circleci-fullstack circleci-fullstack/
           docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-fullstack-cypress:${CIRCLE_BRANCH}" -t circleci-fullstack-cypress circleci-fullstack-cypress/
           docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-deploy:${CIRCLE_BRANCH}" -t circleci-deploy circleci-deploy/
+          # todo: rename circleci-fullstack-chrome to circleci-postgres-ram
+          docker build "${DOCKER_ARGS}" -t "${DOCKER_ORG}/circleci-fullstack-chrome:${CIRCLE_BRANCH}" -t circleci-fullstack-chrome circleci-postgres-ram/
       - run: |
           docker push "${DOCKER_ORG}/circleci-base:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-fullstack:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-fullstack-cypress:${CIRCLE_BRANCH}"
           docker push "${DOCKER_ORG}/circleci-deploy:${CIRCLE_BRANCH}"
+          docker push "${DOCKER_ORG}/circleci-fullstack-chrome:${CIRCLE_BRANCH}"
 workflows:
   version: 2
   commit:
