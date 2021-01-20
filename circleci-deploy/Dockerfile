@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # Install terraform
     git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
     ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
-    tfenv install 0.13.5 && \
-    tfenv use 0.13.5 && \
+    tfenv install 0.14.4 && \
+    tfenv use 0.14.4 && \
 
 
     # install pip
