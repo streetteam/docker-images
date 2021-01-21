@@ -67,8 +67,8 @@ WORKDIR /home/ciuser
 RUN heroku plugins:install heroku-repo && \
     heroku plugins:install heroku-releases-retry
 
-# Preload NodeJS 12.6.0
-RUN nave use 12.6.0 node --version
+# Preload NodeJS 14.15.4 LTS
+RUN nave use 14.15.4 node --version
 
 COPY bashrc .docker.bashrc
 RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc
