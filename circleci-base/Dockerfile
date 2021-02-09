@@ -36,8 +36,7 @@ RUN apt-get update &&  \
     # Install docker
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable" && \
-    apt-get update && apt-get install -y --no-install-recommends libreadline-gplv2-dev && \
-    apt-get install docker-ce docker-ce-cli containerd.io && \
+    apt-get update && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io && \
 
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
