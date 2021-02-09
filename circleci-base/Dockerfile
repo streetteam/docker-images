@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
     apt-get install -y --no-install-recommends apt-utils wget software-properties-common curl apt-transport-https \
-    build-essential checkinstall make gcc sudo unzip zip libglu1-mesa libxi6 && \
+    build-essential checkinstall make gcc sudo unzip zip libglu1-mesa libxi6 gnupg-agent && \
     # install gdal
     add-apt-repository ppa:ubuntugis/ppa && \
     apt-get update && \
@@ -31,7 +31,13 @@ RUN apt-get update &&  \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client-11 git openssh-client heroku parallel && \
+    postgresql-client-11 git openssh-client ca-certificates heroku parallel && \
+
+    # Install docker
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable" && \
+    apt-get update && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io && \
+
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
