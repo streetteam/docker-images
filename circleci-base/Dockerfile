@@ -38,11 +38,6 @@ RUN apt-get update &&  \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable" && \
     apt-get update && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io && \
 
-    # Install docker-compose
-    set -x && \
-    curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-    chmod a+rx /usr/local/bin/docker-compose && \
-
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
@@ -53,6 +48,10 @@ RUN apt-get update &&  \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
     update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
 
+# Install docker-compose
+RUN set -x && \
+    curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose && \
+    chmod +x /usr/bin/docker-compose
 
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
