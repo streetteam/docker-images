@@ -38,6 +38,11 @@ RUN apt-get update &&  \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable" && \
     apt-get update && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io && \
 
+    # Install docker-compose
+    set -x && \
+    curl -L https://github.com/docker/compose/releases/download/1.28.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose && \
+
     apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
