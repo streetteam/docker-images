@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get update && apt-get install -y --no-install-recommends git openssh-client build-essential checkinstall \
     heroku postgresql-client make gcc sudo && \
     # python3.7 related dependencies
-    apt-get install -y --no-install-recommends python2.7-minimal libreadline-gplv2-dev \
+    apt-get install -y --no-install-recommends python2.7-minimal libreadline-dev \
     libncursesw5-dev libssl-dev sqlite3 libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
     libbz2-dev libffi-dev zlib1g-dev wget gettext libgettextpo-dev libgnutls28-dev && \
     # download python3.7 and install
