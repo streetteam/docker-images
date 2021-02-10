@@ -48,11 +48,6 @@ RUN apt-get update &&  \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 10 && \
     update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 10
 
-# Install docker-compose
-RUN set -x && \
-    curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose && \
-    chmod +x /usr/bin/docker-compose
-
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
     chmod +x /usr/bin/nave
