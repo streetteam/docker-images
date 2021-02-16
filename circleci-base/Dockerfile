@@ -74,6 +74,7 @@ RUN heroku plugins:install heroku-repo && \
 
 # Preload NodeJS 14.15.4 LTS
 RUN nave use 14.15.4 node --version
+RUN nave usemain 14.15.4
 
 COPY bashrc .docker.bashrc
 RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc
