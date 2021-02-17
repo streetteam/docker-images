@@ -3,6 +3,10 @@ FROM circleci-fullstack-cypress
 USER root
 
 RUN nave usemain 14.15.4
+RUN apt-get -y install tmux
+RUN set -x && \	
+    curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose && \	
+    chmod +x /usr/bin/docker-compose
 
 EXPOSE 1080
 EXPOSE 15672
