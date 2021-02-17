@@ -26,3 +26,4 @@ EXPOSE 9100
 EXPOSE 9200
 
 RUN mkdir /code
+WORKDIR /code
