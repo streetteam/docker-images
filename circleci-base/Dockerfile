@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
     apt-get install -y --no-install-recommends apt-utils wget software-properties-common curl apt-transport-https \
-    build-essential checkinstall make gcc sudo unzip zip libglu1-mesa libxi6 gnupg-agent && \
+    build-essential checkinstall make gcc sudo unzip zip libglu1-mesa libxi6 gnupg-agent redis-tools && \
     # install gdal
     add-apt-repository ppa:ubuntugis/ppa && \
     apt-get update && \
