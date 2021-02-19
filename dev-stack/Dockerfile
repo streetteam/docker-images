@@ -8,6 +8,12 @@ RUN set -x && \
     curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose && \	
     chmod +x /usr/bin/docker-compose
 
+RUN service docker start
+
+RUN apt-get install libnss3-tools
+RUN mkdir -p $HOME/.pki/nssdb
+RUN certutil -d $HOME/.pki/nssdb -N --empty-password
+
 EXPOSE 1080
 EXPOSE 15672
 EXPOSE 2020
