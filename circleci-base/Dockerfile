@@ -56,6 +56,10 @@ RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/n
 RUN curl -o /usr/bin/install-yarn https://yarnpkg.com/install.sh && \
     chmod +x /usr/bin/install-yarn
 
+# Install aws cli session manager
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" \
+    -o "session-manager-plugin.deb" && dpkg -i session-manager-plugin.deb
+
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 

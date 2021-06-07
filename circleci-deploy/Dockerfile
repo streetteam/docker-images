@@ -49,6 +49,10 @@ RUN curl -sL https://sentry.io/get-cli/ | bash
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash ciuser && echo "ciuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+# Install aws cli session manager
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" \
+    -o "session-manager-plugin.deb" && dpkg -i session-manager-plugin.deb
+
 # Set correct locale and ensure locale is available in any interactive/non-interactive shell
 COPY locale /etc/default/locale
 ENV LC_ALL C.UTF-8
