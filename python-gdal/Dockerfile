@@ -17,10 +17,6 @@ RUN apt-get remove -y binutils
 
 RUN apt-get update && apt-get install -y gdal-bin libgdal-dev libmemcached-dev g++
 
-RUN apt-get clean -y && \
-    apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
-
 ## Update C env vars so compiler can find gdal
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
@@ -29,6 +25,10 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
 RUN chmod +x /tmp/s6-overlay-amd64-installer && /tmp/s6-overlay-amd64-installer /
 RUN apt-get update && apt-get install -y nginx ruby ruby-dev git
+
+RUN apt-get clean -y && \
+    apt-get autoremove --purge -y && \
+    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 RUN mkdir /code
 WORKDIR /code
