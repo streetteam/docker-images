@@ -15,7 +15,7 @@ RUN sed -i "s/local   all             postgres                                pe
 ## Existing binutils causes a dependency conflict, correct version will be installed when GDAL gets intalled
 RUN apt-get remove -y binutils
 
-RUN apt-get update && apt-get install -y gdal-bin libgdal-dev g++
+RUN apt-get update && apt-get install -y gdal-bin libgdal-dev libmemcached-dev g++
 
 RUN apt-get clean -y && \
     apt-get autoremove --purge -y && \
