@@ -33,7 +33,7 @@ RUN apt-get clean -y && \
 
 # Restrict further actions to the non-root 'ciuser' user, but with access to sudo
 RUN useradd -ms /bin/bash app && echo "app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-RUN chown -R app:app /etc/nginx /var/lib/nginx /var/log/nginx/ /dev
+RUN chown -R app:app /var/run/s6
 
 USER app
 
