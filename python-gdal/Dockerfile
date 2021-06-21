@@ -36,4 +36,6 @@ RUN useradd -ms /bin/bash app && echo "app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudo
 USER app
 
 RUN mkdir /home/app/code
+ENV PATH="/home/app/.local/bin:${PATH}"
+
 WORKDIR /home/app/code
