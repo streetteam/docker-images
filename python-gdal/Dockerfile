@@ -30,5 +30,10 @@ RUN apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-RUN mkdir /code
-WORKDIR /code
+
+# Restrict further actions to the non-root 'ciuser' user, but with access to sudo
+RUN useradd -ms /bin/bash app && echo "app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER app
+
+RUN mkdir /home/app/code
+WORKDIR /home/app/code
