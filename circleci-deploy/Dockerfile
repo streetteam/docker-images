@@ -1,7 +1,7 @@
 FROM bitnami/minideb:unstable
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        apt-utils software-properties-common curl gnupg2 apt-transport-https unzip zip && \
+        apt-utils software-properties-common curl gnupg2 apt-transport-https unzip zip jq && \
     curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
     add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     apt-get update && apt-get install -y --no-install-recommends git openssh-client build-essential checkinstall \
