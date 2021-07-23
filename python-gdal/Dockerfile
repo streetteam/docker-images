@@ -7,10 +7,16 @@ RUN apt-get install -y
 RUN echo deb http://ftp.uk.debian.org/debian stable main contrib non-free >> /etc/apt/sources.list
 RUN apt-get update
 
-RUN apt-get install -y postgresql-client-11 postgresql-11-postgis-2.5
+# Install Postgres12
+RUN apt-get install -y wget ca-certificates gnupg2
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+RUN apt-get update
+RUN apt-get -y install postgresql-client-12 postgresql-12-postgis-2.5
+
 
 ## Update privs to allow Postgres to run locally
-RUN sed -i "s/local   all             postgres                                peer/local   all             postgres                                trust/" /etc/postgresql/11/main/pg_hba.conf
+RUN sed -i "s/local   all             postgres                                peer/local   all             postgres                                trust/" /etc/postgresql/12/main/pg_hba.conf
 
 ## Existing binutils causes a dependency conflict, correct version will be installed when GDAL gets intalled
 RUN apt-get remove -y binutils
