@@ -31,7 +31,7 @@ RUN apt-get update &&  \
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client-11 git openssh-client ca-certificates heroku parallel && \
+    postgresql-client-12 git openssh-client ca-certificates heroku parallel && \
 
     # Install docker
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
