@@ -1,4 +1,4 @@
-FROM python:3.7.10-slim
+FROM streetteam/python-psql:master
 
 RUN apt-get update
 RUN apt-get install -y
@@ -6,14 +6,6 @@ RUN apt-get install -y
 # Add unstable repo to allow us to access latest GDAL builds
 RUN echo deb http://ftp.uk.debian.org/debian stable main contrib non-free >> /etc/apt/sources.list
 RUN apt-get update
-
-# Install Postgres12
-RUN apt-get install -y wget ca-certificates gnupg2
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
-RUN apt-get update
-RUN apt-get -y install postgresql-client-12 postgresql-12-postgis-2.5
-
 
 ## Update privs to allow Postgres to run locally
 RUN sed -i "s/local   all             postgres                                peer/local   all             postgres                                trust/" /etc/postgresql/12/main/pg_hba.conf
@@ -36,5 +28,4 @@ RUN apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-RUN mkdir /code
 WORKDIR /code
