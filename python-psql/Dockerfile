@@ -10,5 +10,4 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" | tee  
 RUN apt-get update
 RUN apt-get -y install postgresql-client-12 postgresql-12-postgis-2.5
 
-RUN mkdir /code
 WORKDIR /code
