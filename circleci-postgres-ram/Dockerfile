@@ -1,4 +1,4 @@
-FROM cimg/postgres:12.8-postgis
+FROM circleci/postgres:12.8-postgis-ram
 
 
 # increase PG connections
