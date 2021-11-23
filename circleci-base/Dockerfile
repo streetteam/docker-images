@@ -9,10 +9,9 @@ RUN apt-get update &&  \
     add-apt-repository ppa:ubuntugis/ppa && \
     apt-get update && \
     apt-get install -y gdal-bin libgdal-dev && \
-    # python3.8.12 related dependencies
-    add-apt-repository ppa:deadsnakes/ppa && \
 
-    # download python3.8.12 and install
+    # install python3.8
+    add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y python3.8 python3.8-dev python3.8-venv && \
 
