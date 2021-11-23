@@ -2,14 +2,20 @@ FROM bitnami/minideb:unstable
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         apt-utils software-properties-common curl gnupg2 apt-transport-https unzip zip jq && \
-    curl -L https://cli-assets.heroku.com/apt/release.key | apt-key add - && \
-    add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./" && \
     apt-get update && apt-get install -y --no-install-recommends git openssh-client build-essential checkinstall \
     postgresql-client make gcc sudo && \
+
     # install python3.8
-    add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt-get install -y python3.8 python3.8-dev python3.8-venv && \
+    apt-get install -y zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev \
+    libreadline-dev libffi-dev libbz2-dev wget && \
+    cd /opt && wget https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz && \
+    tar xzf Python-3.8.12.tgz && \
+    cd Python-3.8.12 && ./configure --enable-optimizations && \
+    make altinstall && \
+
+    # install pip
+    curl https://bootstrap.pypa.io/get-pip.py | sudo python3.8 && \
 
     # Install terraform
     git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
@@ -17,18 +23,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tfenv install 1.0.9 && \
     tfenv use 1.0.9 && \
 
-
-    # install pip
-    curl https://bootstrap.pypa.io/get-pip.py | sudo python3.8 && \
-    
     apt-get remove -y --purge software-properties-common gnupg2 apt-transport-https && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # Ensure python3.8 is default
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 1
     
 RUN pip install --upgrade pip requests setuptools
 
@@ -54,7 +56,3 @@ ENV LANGUAGE C.UTF-8
 
 USER ciuser
 WORKDIR /home/ciuser
-
-# heroku plugins installation
-RUN heroku plugins:install heroku-repo && \
-    heroku plugins:install heroku-releases-retry

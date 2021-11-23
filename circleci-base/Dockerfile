@@ -15,11 +15,11 @@ RUN apt-get update &&  \
     apt-get update && \
     apt-get install -y python3.8 python3.8-dev python3.8-venv && \
 
-    # airflow related deps
-    apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake && \
-
     # install pip
     curl https://bootstrap.pypa.io/get-pip.py | sudo python3.8 && \
+
+    # airflow related deps
+    apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake && \
 
     # postgres deps
     add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"  && \
