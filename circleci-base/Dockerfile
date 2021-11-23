@@ -14,6 +14,8 @@ RUN apt-get update &&  \
     apt-get update && \
     apt-get install -y zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev \
     libreadline-dev libffi-dev libbz2-dev wget && \
+    # dependency needed for pycurl
+    apt-get install -y libgnutls28-dev && \
     cd /opt && wget https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz && \
     tar xzf Python-3.8.12.tgz && \
     cd Python-3.8.12 && ./configure --enable-optimizations && \
