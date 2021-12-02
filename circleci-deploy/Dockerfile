@@ -11,13 +11,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libreadline-dev libffi-dev libbz2-dev wget && \
     # dependency needed for pycurl
     apt-get install -y libgnutls28-dev gettext libgettextpo-dev && \
-    cd /opt && wget https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz && \
-    tar xzf Python-3.8.12.tgz && \
-    cd Python-3.8.12 && ./configure --enable-optimizations && \
+    cd /opt && wget https://www.python.org/ftp/python/3.9.9/Python-3.9.9.tgz && \
+    tar xzf Python-3.9.9.tgz && \
+    cd Python-3.9.9 && ./configure --enable-optimizations && \
     make altinstall && \
 
     # install pip
-    curl https://bootstrap.pypa.io/get-pip.py | sudo python3.8 && \
+    curl https://bootstrap.pypa.io/get-pip.py | sudo python3.9 && \
 
     # Install terraform
     git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
@@ -31,8 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # Ensure python3.8 is default
-RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 1 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 1
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.9 1
     
 RUN pip install --upgrade pip requests setuptools
 

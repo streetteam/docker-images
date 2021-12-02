@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tfenv use 1.0.9
 
 # Ensure python3.8 is default
-RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 1 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 1
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.9 1
 
 USER ciuser

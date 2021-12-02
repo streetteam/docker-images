@@ -16,13 +16,13 @@ RUN apt-get update &&  \
     libreadline-dev libffi-dev libbz2-dev wget && \
     # dependency needed for pycurl and repos
     apt-get install -y libgnutls28-dev gettext libgettextpo-dev && \
-    cd /opt && wget https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz && \
-    tar xzf Python-3.8.12.tgz && \
-    cd Python-3.8.12 && ./configure --enable-optimizations && \
+    cd /opt && wget https://www.python.org/ftp/python/3.9.9/Python-3.9.9.tgz && \
+    tar xzf Python-3.9.9.tgz && \
+    cd Python-3.9.9 && ./configure --enable-optimizations && \
     make altinstall && \
 
     # install pip
-    curl https://bootstrap.pypa.io/get-pip.py | sudo python3.8 && \
+    curl https://bootstrap.pypa.io/get-pip.py | sudo python3.9 && \
 
     # airflow related deps
     apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake && \
@@ -44,8 +44,8 @@ RUN apt-get update &&  \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # Ensure python3.8 is default
-RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 1 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 1
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.9 1
 
 # Install nave for NodeJS versions
 RUN curl -o /usr/bin/nave https://raw.githubusercontent.com/isaacs/nave/master/nave.sh && \
