@@ -1,4 +1,4 @@
-FROM streetteam/python-psql:master
+FROM python-psql
 
 RUN apt-get update
 RUN apt-get install -y
