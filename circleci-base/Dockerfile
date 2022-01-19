@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 # Install python3.9.9 and official PostgreSQL repo,
 # add all our standard system dependencies, and then clean up after ourselves
