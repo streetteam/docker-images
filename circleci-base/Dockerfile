@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-# Install python3.8 and official PostgreSQL repo,
+# Install python3.9.9 and official PostgreSQL repo,
 # add all our standard system dependencies, and then clean up after ourselves
 RUN apt-get update &&  \
     apt-get install -y --no-install-recommends apt-utils wget software-properties-common curl apt-transport-https \
@@ -10,7 +10,7 @@ RUN apt-get update &&  \
     apt-get update && \
     apt-get install -y gdal-bin libgdal-dev && \
 
-     # install python3.8
+     # install python3.9.9
     apt-get update && \
     apt-get install -y zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev \
     libreadline-dev libffi-dev libbz2-dev wget && \
@@ -43,7 +43,7 @@ RUN apt-get update &&  \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-# Ensure python3.8 is default
+# Ensure python3.9.9 is default
 RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 1 && \
     update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.9 1
 
