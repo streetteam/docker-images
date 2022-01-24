@@ -11,6 +11,7 @@ RUN apt-get update && \
     libnss3 \
     libxss1 \
     libasound2 \
+    libatk-bridge2.0-0 \
     xvfb
 
 USER ciuser
