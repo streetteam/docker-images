@@ -6,8 +6,8 @@ USER root
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential ruby ruby-dev unzip \
     redis-server rabbitmq-server ca-certificates jq && \
-    # Note: `--no-ri` is now deprecated in ubuntu focal, the option is now `--no-document`
-    gem install mailcatcher -v 0.6.5 --no-document --no-rdoc &&  \
+    # Note: `--no-ri` and `--no-rdoc` is now deprecated in ubuntu focal, the option is now `--no-document`
+    gem install mailcatcher -v 0.6.5 --no-document &&  \
     apt-get remove -y --purge ruby-dev && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
