@@ -9,7 +9,7 @@ RUN apt-get update && \
 # Install GDAL
 RUN add-apt-repository ppa:ubuntugis/ppa && \
     apt-get update && \
-    apt-get install -y --no-install-recommends libgdal-dev libgnutls28-dev libmemcached-dev postgresql-client gettext
+    apt-get install -y --no-install-recommends libgdal-dev libgnutls28-dev libmemcached-dev gettext
 
 # install python3.9
 RUN add-apt-repository ppa:deadsnakes/ppa && \
