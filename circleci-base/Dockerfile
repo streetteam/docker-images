@@ -2,8 +2,9 @@ FROM ubuntu:focal
 
 # Install system essentials
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends software-properties-common apt-utils dialog && \
-    apt-get install -y --no-install-recommends git openssh-client ca-certificates parallel curl gnupg lsb-release
+    apt-get install -y --no-install-recommends software-properties-common apt-utils dialog build-essential make gcc && \
+    apt-get install -y --no-install-recommends git openssh-client ca-certificates parallel curl gnupg lsb-release && \
+    apt-get install -y --no-install-recommends apt-transport-https
 
 # Install GDAL
 RUN add-apt-repository ppa:ubuntugis/ppa && \
