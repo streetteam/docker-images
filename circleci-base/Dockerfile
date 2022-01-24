@@ -8,7 +8,7 @@ ENV LANGUAGE C.UTF-8
 RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common apt-utils && \
     apt-get install -y --no-install-recommends git openssh-client ca-certificates parallel curl gnupg lsb-release && \
-    apt-get install -y --no-install-recommends apt-transport-https build-essential make gcc redis-tools gnupg-agent
+    apt-get install -y --no-install-recommends apt-transport-https make gcc redis-tools gnupg-agent
 
 # Install GDAL
 RUN add-apt-repository ppa:ubuntugis/ppa && \
@@ -18,7 +18,10 @@ RUN add-apt-repository ppa:ubuntugis/ppa && \
 # install python3.9
 RUN add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt-get install -y python3.9 python3-pip
+    # python3.9-venv python3.9-dev due to this error:
+    # Error: Command '['/path/to/env/bin/python3.7', '-Im', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1
+    # source: https://askubuntu.com/questions/1268833/error-command-path-to-env-bin-python3-7-im-ensurepip-upgrade
+    apt-get install -y python3.9 python3-pip python3.9-venv python3.9-dev
 
 # Airflow related deps
 RUN apt-get install -y --no-install-recommends librabbitmq-dev libtool-bin pkg-config autoconf automake
