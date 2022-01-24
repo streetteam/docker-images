@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get remove -y --purge ruby-dev && \
     apt-get clean -y && \
     apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
-    # Install terraform
+    rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
+# Install terraform
 RUN git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
     ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
     tfenv install 1.0.9 && \
