@@ -11,7 +11,7 @@ RUN git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
     ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
     tfenv install 1.0.9 && \
     tfenv use 1.0.9
-#
+
 # Clean up
 RUN apt-get remove -y --purge software-properties-common && \
     apt-get clean -y && \
