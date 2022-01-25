@@ -68,5 +68,7 @@ WORKDIR /home/ciuser
 # Preload NodeJS 14.15.4 LTS
 RUN nave use 14.15.4 node --version
 
+RUN nave use 14.15.4 npm install --global npm@7
+
 COPY bashrc .docker.bashrc
 RUN cat .docker.bashrc >> .bashrc && rm .docker.bashrc
