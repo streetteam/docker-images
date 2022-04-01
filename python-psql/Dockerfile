@@ -8,7 +8,7 @@ RUN \
   # Update package index with new postgres repo data
   && apt-get update \
   # Finally install postgres
-  && apt-get install -y --no-install-recommends postgresql-client-12 postgresql-12-postgis-2.5 \
+  && apt-get install -y --no-install-recommends postgresql-client-12 \
   # Clean up
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
