@@ -18,8 +18,8 @@ RUN apt-get remove -y --purge ruby-dev && \
 # Install terraform
 RUN git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \
     ln -s /usr/src/.tfenv/bin/* /usr/local/bin && \
-    tfenv install 1.1.5 && \
-    tfenv use 1.1.5
+    tfenv install 1.1.7 && \
+    tfenv use 1.1.7
 
 
 USER ciuser
