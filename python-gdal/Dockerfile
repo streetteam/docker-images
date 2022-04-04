@@ -5,7 +5,7 @@ RUN apt-get install -y
 
 # Add unstable repo to allow us to access latest GDAL builds
 RUN echo deb http://ftp.uk.debian.org/debian stable main contrib non-free >> /etc/apt/sources.list
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends postgresql-12-postgis-2.5
 
 ## Update privs to allow Postgres to run locally
 RUN sed -i "s/local   all             postgres                                peer/local   all             postgres                                trust/" /etc/postgresql/12/main/pg_hba.conf
