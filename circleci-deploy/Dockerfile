@@ -4,7 +4,7 @@ USER root
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    software-properties-common gnupg2 jq
+    software-properties-common gnupg
 
 # Install terraform
 RUN git clone https://github.com/tfutils/tfenv.git /usr/src/.tfenv && \

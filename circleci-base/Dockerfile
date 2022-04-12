@@ -7,7 +7,7 @@ ENV LANGUAGE C.UTF-8
 # Install system essentials
 RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common apt-utils sudo zip unzip && \
-    apt-get install -y --no-install-recommends git openssh-client ca-certificates parallel curl gnupg lsb-release && \
+    apt-get install -y --no-install-recommends git openssh-client ca-certificates parallel curl gnupg jq lsb-release && \
     apt-get install -y --no-install-recommends apt-transport-https make gcc redis-tools gnupg-agent
 
 # Install GDAL
