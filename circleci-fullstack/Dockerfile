@@ -5,7 +5,7 @@ USER root
 # Install mailcatcher, redis and rabbit, then clean up after ourselves
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ruby ruby-dev unzip \
-    redis-server rabbitmq-server ca-certificates jq && \
+    redis-server rabbitmq-server ca-certificates && \
     # Note: `--no-ri` and `--no-rdoc` is now deprecated in ubuntu focal, the option is now `--no-document`
     gem install mailcatcher -v 0.6.5 --no-document
 
