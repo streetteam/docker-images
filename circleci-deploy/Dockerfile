@@ -29,3 +29,7 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
     -o "session-manager-plugin.deb" && dpkg -i session-manager-plugin.deb
 
 USER ciuser
+
+# Install custom Vercel provider
+RUN bash -c "$(curl -sSL https://raw.githubusercontent.com/streetteam/gists/main/install_custom_vercel_repo.sh)"
+
