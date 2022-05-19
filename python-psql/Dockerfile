@@ -10,6 +10,6 @@ RUN \
   # Finally install postgres
   && apt-get install -y --no-install-recommends postgresql-client-12 \
   # Clean up
-  && apt-get clean && rm -rf /var/lib/apt/lists/*
+  && apt-get clean -y && apt-get autoremove --purge -y && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* /var/cache/*
 
 WORKDIR /code
