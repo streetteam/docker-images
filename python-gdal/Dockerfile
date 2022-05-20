@@ -22,7 +22,8 @@ RUN \
     && /tmp/s6-overlay-amd64-installer / \
     && apt-get update \
     && apt-get install -y --no-install-recommends nginx ruby ruby-dev git \
-    # Clean up
+    # Clean up \
+    && apt-get remove -y postgresql-12-postgis-2.5 \
     && apt-get clean -y && apt-get autoremove --purge -y && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* /var/cache/*
 
 WORKDIR /code
